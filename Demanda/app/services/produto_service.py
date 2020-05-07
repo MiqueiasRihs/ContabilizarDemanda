@@ -1,4 +1,13 @@
 from ..models import Produtos
 
-def cadastrar_produto(produto):
-    Produtos.objects.create(nome=Produtos.nome, marca=Produtos.marca, tamanho=Produtos.tamanho, quantidade=Produtos.quantidade, tipo=Produtos.tipo)
+def cadastrar_produto(produtos):
+    Produtos.objects.create(nome=produtos.nome, marca=produtos.marca, tamanho=produtos.tamanho, quantidade=produtos.quantidade, tipo=produtos.tipo)
+
+def listar_produtos():
+    return Produtos.objects.all()
+
+def listar_produtos_id(id):
+    return Produtos.objects.get(id=id)
+
+def remover_produto(tarefa_bd):
+    tarefa_bd.delete()

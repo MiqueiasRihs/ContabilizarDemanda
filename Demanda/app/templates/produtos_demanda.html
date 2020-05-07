@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Document</title>
+    <title>Demanda</title>
 </head>
 
 <body>
@@ -57,17 +57,46 @@
 
             </div>
         </div>
+        
         <div class="col-md-6">
             <div class="card card-body h-100">
                 <h5 style="text-align:center">Produtos Salvos</h5>
                 <hr>
-                <p>Python, HTML/CSS, Docker, SQL, <p>
-                        <p>Obs: Estudando Django, Mongo DB e Data Science.</p>
+                <table class="table table-striped">
+                    {% block conteudo %}
+                    <thead>
+                      <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Tam</th>
+                        <th scope="col">Quant</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for produto in produto %}
+                      <tr>
+                        <th scope="row">{{produto.nome}}</th>
+                        <td>{{produto.get_tipo_display}}</td>
+                        <td>{{produto.marca}}</td>
+                        <td>{{produto.tamanho}}</td>
+                        <td>{{produto.quantidade}}</td>
+                        <td>
+                            <button class="btn btn-danger" type="submit">X</button>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                {% endblock conteudo %}
+                </table>
+
+                
+                
             </div>
         </div>
     </div>
     </div>
-
 </body>
 
 </html>
