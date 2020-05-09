@@ -9,5 +9,5 @@ def listar_produtos():
 def listar_produtos_id(id):
     return Produtos.objects.get(id=id)
 
-def remover_produto(tarefa_bd):
-    tarefa_bd.delete()
+def remover_produto(produto_id):
+    produto_id.delete()

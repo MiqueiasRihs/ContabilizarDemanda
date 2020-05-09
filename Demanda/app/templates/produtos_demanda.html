@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Demanda</title>
@@ -22,7 +23,8 @@
 
     <br>
 
-    <div class="container">
+        </div>
+    <div class="container-fluid">
 
         <div class="row">
             <div class="col-md-6">
@@ -37,62 +39,61 @@
                         {{ form_produtos.nome|addclass:'form-control' }}
                         <label>Tipo: </label>
                         {{ form_produtos.tipo|addclass:'form-control' }}
-                        </div>
-                        <div class="form-group">
-                            <label>Marca: </label>
-                            {{ form_produtos.marca|addclass:'form-control' }}
-                        </div>
-                        <div class="form-group">
-                            <label>Tamanho: </label>
-                            {{ form_produtos.tamanho|addclass:'form-control' }}
-                        </div>
-                        <div class="form-group">
-                            <label>Quant: </label>
-                            {{ form_produtos.quantidade|addclass:'form-control' }}
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Salvar">
-                        </div>
-                    </form>
+                </div>
+                <div class="form-group">
+                    <label>Marca: </label>
+                    {{ form_produtos.marca|addclass:'form-control' }}
+                </div>
+                <div class="form-group">
+                    <label>Tamanho: </label>
+                    {{ form_produtos.tamanho|addclass:'form-control' }}
+                </div>
+                <div class="form-group">
+                    <label>Quant: </label>
+                    {{ form_produtos.quantidade|addclass:'form-control' }}
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-light" type="submit" value="Salvar">
+                </div>
+                </form>
 
             </div>
         </div>
-        
         <div class="col-md-6">
-            <div class="card card-body h-100">
+            <div class="card card-body h-100" style="overflow-y:auto">
                 <h5 style="text-align:center">Produtos Salvos</h5>
-                <hr>
-                <table class="table table-striped">
-                    {% block conteudo %}
-                    <thead>
-                      <tr>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Tipo</th>
-                        <th scope="col">Marca</th>
-                        <th scope="col">Tam</th>
-                        <th scope="col">Quant</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for produto in produto %}
-                      <tr>
-                        <th scope="row">{{produto.nome}}</th>
-                        <td>{{produto.get_tipo_display}}</td>
-                        <td>{{produto.marca}}</td>
-                        <td>{{produto.tamanho}}</td>
-                        <td>{{produto.quantidade}}</td>
-                        <td>
-                            <button class="btn btn-danger" type="submit">X</button>
-                        </td>
-                      </tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>
-                {% endblock conteudo %}
-                </table>
-
-                
-                
+                    <hr> 
+                <div class="table-responsive-lg" style="overflow-x:auto;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th id='colName'scope="col">Nome</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Marca</th>
+                                <th scope="col">Tam</th>
+                                <th scope="col">Quant</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for produto in produto %}
+                            <tr>
+                                <th scope="row">{{produto.nome}}</th>
+                                <td>{{produto.get_tipo_display}}</td>
+                                <td>{{produto.marca}}</td>
+                                <td>{{produto.tamanho}}</td>
+                                <td>{{produto.quantidade}}</td>
+                                <form action='{{produto.id}}' method="GET">
+                                {% csrf_token %}
+                                <td>
+                                <button class="btn btn-danger" type="submit" name="delete_produto" value="{{produto.id}}">X</button>
+                                </td>
+                                </form>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

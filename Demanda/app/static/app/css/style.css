@@ -1,0 +1,18 @@
+table {
+    display:block;
+    height: 450px;
+    }
+
+#colName {
+        width:1000px;
+    }
+
+thead {
+    background-color: black;
+    text-align:center;
+    color: white;
+}
+
+td {
+    text-align: center;
+}
